@@ -1,0 +1,20 @@
+pre-commit:
+  parallel: true
+  commands:
+    fmt-check:
+      glob: "*.go"
+      run: |
+        UNFMT=$(gofmt -l .)
+        if [ -n "$UNFMT" ]; then
+          echo "Files not formatted:"
+          echo "$UNFMT"
+          exit 1
+        fi
+    vet:
+      glob: "*.go"
+      run: go vet ./...
+
+pre-push:
+  commands:
+    test:
+      run: go test ./...

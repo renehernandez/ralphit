@@ -1,0 +1,28 @@
+[tools]
+go = "1.25.0"
+golangci-lint = "latest"
+goreleaser = "latest"
+lefthook = "latest"
+
+[env]
+GOPATH = "{{env.HOME}}/go"
+
+[tasks.build]
+description = "Build the CLI"
+run = "go build -o ralphit ."
+
+[tasks.test]
+description = "Run tests"
+run = "go test -v ./..."
+
+[tasks.lint]
+description = "Run linter"
+run = "golangci-lint run"
+
+[tasks.fmt]
+description = "Format code"
+run = "gofmt -w ."
+
+[tasks.setup]
+description = "Set up development environment"
+run = "lefthook install"
